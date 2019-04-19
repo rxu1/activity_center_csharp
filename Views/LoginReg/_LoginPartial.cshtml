@@ -1,0 +1,20 @@
+@model LoginUser;
+
+<div class="wrapper">
+  <div class="header">
+      <h1>Login:</h1>
+  </div>
+  <form asp-action="Login" asp-controller="LoginReg" method="POST">
+    <div class="form-group">
+      <span asp-validation-for="LoginEmail" class="text-danger"></span><br>
+      <label asp-for="LoginEmail" class="form-horizontal">Email</label>
+      <input type="text" class="form-horizontal" asp-for="LoginEmail" placeholder="name@email.com">
+    </div>
+    <div class="form-group">
+      <span asp-validation-for="LoginPassword" class="text-danger"></span><br>
+      <label asp-for="LoginPassword" class="form-horizontal">Password</label>
+      <input type="password" class="form-horizontal" asp-for="LoginPassword">
+    </div>
+    <button class="btn btn-primary">Login!</button>
+  </form>
+</div>

@@ -1,0 +1,69 @@
+@model List<Activity>;
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6">
+      <h1>Dojo Activity Center</h1>
+    </div>
+    <div class="col-md-6 text-right">
+      <a href="/home" class="btn btn-primary">Home</a>
+      <a href="/Logout" class="btn btn-secondary">Logout</a>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Activity</th>
+        <th scope="col">Date and Time</th>
+        <th scope="col">Duration</th>
+        <th scope="col">Event Coordinator</th>
+        <th scope="col">Number of Particpants</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+    @{
+      foreach (Activity a in @Model)
+      {
+      <tr>
+        <td scope="col"><a href="/activity/@a.ActivityId">@a.Title</a></td>
+        <td scope="col">@a.Date.ToString("MM/dd/yyyy") | @a.Time.ToString("h:mm tt")</td>
+        <td scope="col">@a.Duration @a.DurationType</td>
+        <td scope="col">@a.Coordinator.FirstName @a.Coordinator.LastName</td>
+        <td scope="col">@a.Participants.Count</td>
+        <td scope="col">
+          @{
+            if(@ViewBag.UserId == @a.CoordinatorId)
+            {
+              <a class="btn btn-danger pull-right" href="/delete/@a.ActivityId">Delete</a>
+            } 
+            else
+            {
+              var count = 0;
+              foreach (var p in @a.Participants)
+              {
+                if (@ViewBag.UserId == p.UserId)
+                {
+                    count++;
+                }
+              }
+              if (count == 0)
+              {
+                <a class="btn btn-info pull-right" href="/join/@a.ActivityId">Join</a>
+              }
+              else
+              {
+                <a class="btn btn-warning pull-right" href="/join/@a.ActivityId">Leave</a>
+              }
+            }
+          }  
+        </td>
+      </tr>
+      }
+    }
+    </tbody>
+  </table>
+</div>
+<a class="btn btn-primary pull-right"  href="/create">Add New Activity!</a>
