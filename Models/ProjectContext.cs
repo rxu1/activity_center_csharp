@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
- 
+
 namespace DotNetBelt.Models
 {
     public class ProjectContext : DbContext

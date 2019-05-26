@@ -8,11 +8,11 @@ namespace DotNetBelt.Models
   {
     protected override ValidationResult IsValid(object value, ValidationContext validationContext)
     {
-        if (DateTime.Parse(value.ToString()) < DateTime.Now )
-        {
-            return new ValidationResult("Please enter a future date.");
-        }
-        return ValidationResult.Success;
+      if (DateTime.Parse(value.ToString()) < DateTime.Now )
+      {
+        return new ValidationResult("Date must be in the future!");
+      }
+      return ValidationResult.Success;
     }
   }
 }

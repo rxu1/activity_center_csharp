@@ -11,14 +11,12 @@ namespace DotNetBelt.Models
     public int UserId {get;set;}
 
     [Required]
-    [MinLength(3)]
-    // [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Use letters only please")]
+    [MinLength(2, ErrorMessage="First Name must be longer than 3 characters!")]
     [Display(Name = "First Name:")]
     public string FirstName {get;set;}
 
     [Required]
-    [MinLength(2)]
-    // [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Use letters only please")]
+    [MinLength(2, ErrorMessage="Last Name must be longer than 2 characters!")]
     [Display(Name = "Last Name:")]
     public string LastName {get;set;}
 
@@ -29,7 +27,8 @@ namespace DotNetBelt.Models
 
     [Required]
     [DataType(DataType.Password)]
-    // [RegularExpression(@"^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$", ErrorMessage = "Password must be minimum eight characters, at least one letter, one number and one special character")]
+    // [MinLength(8, ErrorMessage="Password must be longer than 8 characters!")]
+    [RegularExpression(@"^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$", ErrorMessage = "Password must be at least 8 characters long and contain at least one letter, one number and one special character! I know, this gets me every time!")]
     [Display(Name = "Password:")]
     public string Password {get;set;}
     public DateTime CreatedAt {get;set;} = DateTime.Now;
